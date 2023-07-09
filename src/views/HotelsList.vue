@@ -1,22 +1,12 @@
 <template>
   <h2>Hotels List</h2>
-
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Rating</th>
-      <th>Booking</th>
-    </tr>
-    <tr v-for="hotel in hotelsList" :key="hotel.id">
-      <td class="hotel-name">{{ hotel.hotel_name }}</td>
-      <td class="hotel-address">{{ hotel.hotel_address }}</td>
-      <td class="hotel-rating">{{ hotel.hotel_rating }}</td>
-      <td class="hotel-book">
-        <base-button @click="showBookingForm(hotel.id)">Book Now</base-button>
-      </td>
-    </tr>
-  </table>
+  <listing-table
+    :headerTitles="['Hotel Name', 'Hotel Address', 'Rating']"
+    :filedsToShow="['hotel_name', 'hotel_address', 'hotel_rating']"
+    :fieldsData="hotelsList"
+    :actionsButtonsFn="showBookingForm"
+    :actionsButtonsLabel="'Book Now'"
+  ></listing-table>
   <modal-overlay v-if="bookingFormVisible" :hideModalFn="hideBookingForm">
     <booking-form
       @submit-form="formSubmitHandler"
@@ -29,13 +19,12 @@
 </template>
 
 <script>
-import BookingForm from "../components/BookingForm.vue";
 import bookingStore from "../store/bookingStore";
+import BookingForm from "../components/BookingForm.vue";
 
 export default {
-  components: { BookingForm },
   name: "HotelsList",
-
+  components: { BookingForm },
   data() {
     return {
       visibleNotification: false,
@@ -65,22 +54,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-td.hotel-name {
-  text-transform: capitalize;
-}
-</style>

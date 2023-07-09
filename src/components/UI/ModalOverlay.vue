@@ -8,7 +8,14 @@
 
 <script>
 export default {
-  props: ["hideModalFn"],
+  name: "ModalOverlay",
+  // a function to hide the modal when triggered
+  props: {
+    hideModalFn: {
+      type: Function,
+      required: true,
+    },
+  },
 };
 </script>
 

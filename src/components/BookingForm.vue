@@ -48,8 +48,14 @@ import bookingStore from "../store/bookingStore";
 export default {
   name: "BookingForm",
   emits: ["submitForm"],
-  props: ["selectedHotelId"],
+  props: {
+    selectedHotelId: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
+    // this property will enable and disable submit button to prevent user from add invalid data
     validForm() {
       if (this.validName && this.validPhone && this.validEmail) {
         return true;
@@ -68,9 +74,9 @@ export default {
     };
   },
   methods: {
+    // when data is submited, the data is saved in the store inputs are reseted and form is hided
     submitUserData(event) {
       event.preventDefault();
-
       const userData = {
         id: `${Math.random()}`,
         user_name: this.userName,
@@ -81,6 +87,7 @@ export default {
 
       bookingStore.commit("addBooking", userData);
       this.resetInputs();
+      // emit submitForm to hide the form
       this.$emit("submitForm");
     },
     resetInputs() {
@@ -88,13 +95,19 @@ export default {
       this.userEmail = "";
       this.userPhoneNumber = "";
     },
+    /* Inputs Validation Methods */
     validateName(value) {
+      // name is valid if its length is more than three.
       return value.trim().length >= 3;
     },
     validateEmail(value = "") {
-      return value.trim().includes("@");
+      // Regular expression for validating email addresses.
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      // Return true if the email address matches the regular expression.
+      return emailRegex.test(value);
     },
     validatePhone(value) {
+      // phone is valid if it is a number and has length of 11.
       if (value.length !== 11) {
         return false;
       }

@@ -5,6 +5,12 @@
   </header>
 </template>
 
+<script>
+export default {
+  name: "MainHeader",
+};
+</script>
+
 <style scoped>
 .main-header {
   display: flex;

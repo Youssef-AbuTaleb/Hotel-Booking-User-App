@@ -12,8 +12,7 @@ export default {
 
 <style scoped>
 .main-footer {
-  position: absolute;
-  bottom: 0;
+  margin-top: auto;
   padding: 1rem;
   width: 100%;
   background: antiquewhite;

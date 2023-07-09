@@ -15,6 +15,7 @@ export default {
   name: "MainNav",
   data() {
     return {
+      // this data can be changed accordingly based on routes
       navData: [
         {
           tabLabel: "Hotels List",

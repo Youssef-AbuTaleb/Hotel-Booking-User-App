@@ -18,7 +18,12 @@
 <script>
 export default {
   name: "BaseInput",
+  // update:modelValue is used to add v-model to the custom component
+  // validInput/invalidInput is emitted to notify parent component of te input validity
   emits: ["update:modelValue", "validInput", "invalidInput"],
+  mounted() {
+    console.log(typeof this.modelValue);
+  },
   props: [
     "modelValue",
     "id",
@@ -29,6 +34,7 @@ export default {
     "validateFn",
   ],
   watch: {
+    // this watcher will emit events to notify parent component of te input validity.
     modelValue(newValue) {
       if (!this.validateFn(newValue)) {
         this.invalidInput = true;

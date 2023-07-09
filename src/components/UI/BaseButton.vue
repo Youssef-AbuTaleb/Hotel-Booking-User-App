@@ -39,14 +39,14 @@ button:disabled {
   background-color: #acacac;
 }
 
-.flat {
-  color: #004982;
-  background-color: #fff;
-  border: 1px solid #cecece;
+.red {
+  /* color: #004982; */
+  /* border: 1px solid #cecece; */
+  background-color: #ff6060;
 }
 
-button.flat:hover,
-button.flat:active {
-  background-color: #f6f6f6;
+button.red:hover,
+button.red:active {
+  background-color: #ff8181;
 }
 </style>
