@@ -48,6 +48,7 @@ import bookingStore from "../store/bookingStore";
 export default {
   name: "BookingForm",
   emits: ["submitForm"],
+  // hotel id received from HotelList component which is setted due to user click on the book button.
   props: {
     selectedHotelId: {
       type: String,
@@ -55,7 +56,7 @@ export default {
     },
   },
   computed: {
-    // this property will enable and disable submit button to prevent user from add invalid data
+    // this property will enable and disable submit button to prevent user from adding invalid data.
     validForm() {
       if (this.validName && this.validPhone && this.validEmail) {
         return true;
@@ -75,6 +76,7 @@ export default {
   },
   methods: {
     // when data is submited, the data is saved in the store inputs are reseted and form is hided
+    // also hotel id is added to sent data
     submitUserData(event) {
       event.preventDefault();
       const userData = {
@@ -84,10 +86,9 @@ export default {
         user_phone: this.userPhoneNumber,
         hotel_id: this.selectedHotelId,
       };
-
       bookingStore.commit("addBooking", userData);
       this.resetInputs();
-      // emit submitForm to hide the form
+      // emit submitForm to hide the form and reset data.
       this.$emit("submitForm");
     },
     resetInputs() {

@@ -34,22 +34,27 @@ export default {
     };
   },
   methods: {
+    // this method will show the booking form and save the hotel id to be used later
+    // hotel id will passed as props to the Shown form to be attached with sent data
     showBookingForm(hotelId) {
       this.bookingFormVisible = true;
       this.selectedHotelId = hotelId;
     },
+    // hide the form
     hideBookingForm() {
       this.bookingFormVisible = false;
     },
-    formSubmitHandler() {
-      this.hideBookingForm();
-      this.showNotification();
-    },
+    // show notification and hide it after 1.5 second
     showNotification() {
       this.visibleNotification = true;
       setTimeout(() => {
         this.visibleNotification = false;
       }, 1500);
+    },
+    // when form is submitted hide the form and show the notification message
+    formSubmitHandler() {
+      this.hideBookingForm();
+      this.showNotification();
     },
   },
 };

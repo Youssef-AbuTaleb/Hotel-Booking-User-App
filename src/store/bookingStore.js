@@ -3,7 +3,11 @@ import { createStore } from "vuex";
 const bookingStore = createStore({
   state() {
     return {
+      // each object in the array should contains: user id ,user_nameuser_email,user_phone and hotel_id.
       userBookings: [],
+
+      // array state to save user hotels data available for booking.
+      // this data can be changed accordingly to add,update and remove hotels data.
       hotelsList: [
         {
           id: "1",
@@ -45,13 +49,16 @@ const bookingStore = createStore({
     };
   },
   mutations: {
+    // adding a booking object to the userBookings state array.
     addBooking(state, userData) {
+      // finding the hotel name by recieved hotel id and adding it to the pushed object.
       let selectedHotelName = state.hotelsList.find(
         (hotel) => hotel.id === userData.hotel_id
       ).hotel_name;
-
+      // push modified object to array
       state.userBookings.push({ ...userData, hotel_name: selectedHotelName });
     },
+    //remove a booking by id recieved from parameters.
     removeBooking(state, bookingId) {
       state.userBookings = state.userBookings.filter(
         (booking) => booking.id !== bookingId
